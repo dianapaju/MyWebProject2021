@@ -1,0 +1,161 @@
+body {
+    background-image: url("https://i.pinimg.com/originals/cb/71/38/cb7138a8741aeec32eec44228fd179bb.jpg");
+}
+h2 {
+    color: rgb(49, 18, 18);
+    font-size: 30px;
+    text-align: center;
+    font-family: garamond, 'Times New Roman', Times, serif;
+    text-shadow: rgba(0, 0, 0, 0.5) 1px 1px, rgba(63, 63, 63, 0.3) 3px 7px 3px;
+}
+h1 {
+    color: rgb(0, 61, 61);
+    border-width: 5px;
+    border-color: rgb(226, 212, 14);
+    border-style: double;
+}
+p {
+    color: rgb(53, 0, 0);
+    background-color: rgba(255, 255, 255, 0.541);
+    width: 480px;
+    border-radius: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-family: garamond, 'Times New Roman', Times, serif;
+    font-size: 17px;
+}
+.blue-h1 {
+    color: blue;
+    font-size: 50px;
+    border-width: 5px;
+    border-color: rgb(43, 14, 226);
+    border-style: double;
+}
+#red-h1 {
+    color: red;
+    font-size: 50px;
+    border-width: 5px;
+    border-color: rgb(43, 14, 226);
+    border-style: double;
+}
+/*.div-1 {
+    width: 700px;
+    background-color: rgba(105, 90, 205, 0.712);
+    border-width: 10px;
+    border-color: slateblue;
+    border-style: double;
+    padding: 5px;
+} */
+.konteiner-foto-kote {
+    height: 550px;
+    width: 550px;
+}
+.sama-foto-kote {
+    height: 100%;
+    border: 5px;
+    border-style: outset;
+    border-color: sandybrown salmon sandybrown salmon;
+}
+/*.ssilki {
+    width: 300px;
+    margin-top: 10px;
+    font-size: 20px;
+    text-transform: uppercase;
+    border-width: 5px;
+    border-color: rgb(0, 0, 0);
+    border-style: solid;
+    border-radius: 30px;
+    padding: 5px;
+}*/
+.sravnenie {
+    border-width: 5px;
+    border-color: rgb(90, 1, 1);
+    border-style: solid;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.842);
+    border-radius: 30px;
+}
+
+tr {
+    color: black;
+    font-family: garamond, 'Times New Roman', Times, serif;
+    text-align: center;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(43, 8, 8);
+}
+
+.button-table {
+    margin: auto;
+}
+
+.flora-button {
+    position: relative;
+    display: inline-block;
+    color: #2b0909;
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: none;
+    text-shadow: rgba(255,255,255,.5) 1px 1px, rgba(63, 63, 63, 0.3) 3px 7px 3px;
+    font-family: garamond, 'Times New Roman', Times, serif;
+    user-select: none;
+    padding: 1em 2em;
+    outline: none;
+    border-radius: 30px / 100%;
+    background-image:
+     linear-gradient(45deg, rgba(255,255,255,.0) 30%, rgba(255,255,255,.8), rgba(255,255,255,.0) 70%),
+     linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 90%, rgba(255,255,255,.3)),
+     linear-gradient(to right, rgba(125,125,125,1), rgba(255,255,255,.9) 45%, rgba(125,125,125,.5)),
+     linear-gradient(to right, rgba(125,125,125,1), rgba(255,255,255,.9) 45%, rgba(125,125,125,.5)),
+     linear-gradient(to right, rgba(223,190,170,1), rgba(255,255,255,.9) 45%, rgba(223,190,170,.5)),
+     linear-gradient(to right, rgba(223,190,170,1), rgba(255,255,255,.9) 45%, rgba(223,190,170,.5));
+    background-repeat: no-repeat;
+    background-size: 200% 100%, auto, 100% 2px, 100% 2px, 100% 1px, 100% 1px;
+    background-position: 200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
+    box-shadow: rgba(0,0,0,.5) 3px 10px 10px -10px;
+  }
+  .flora-button:hover {
+    transition: .5s linear;
+    background-position: -200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
+  }
+  .flora-button:active {
+    top: 1px;
+  }
+  .foto-kanadi {
+      background-color: rgba(255, 255, 255, 0);
+  }
+
+  .foto-gorod {
+    border-width: 3px;
+    border-radius: 30px;
+    height: 350px;
+    /*float: right;*/
+  }
+  .foto-les {
+    /*float: left;*/
+    border-width: 3px;
+    border-radius: 30px;
+    height: 350px;
+  }
+  .foto-lebed {
+    /*float: left;*/
+    border-width: 3px;
+    border-radius: 30px;
+    height: 350px;
+  }
+
+  .foto-kolso-obozrenia {
+    /*float: right;*/
+    border-width: 3px;
+    border-radius: 30px;
+    height: 350px;
+  }
+  button {
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 30px;
+      border-style: solid;
+      border-color: rgb(78, 15, 15);
+      color: rgb(53, 0, 0);
+      font-family: garamond, 'Times New Roman', Times, serif;
+      font-size: 17px;
+  }

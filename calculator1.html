@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Простой калькулятор</title>
+        <meta charset="utf-8">
+        <style>
+            body {
+                background-image: url(images/1610225476_5-p-fon-na-pk-s-kosmosom-15.jpg);
+
+            }
+            input {
+                width: 100px;
+                border-radius: 25px;
+                border-width: 2px;
+                font-family: garamond;
+                font-size: 17px;
+            }
+
+            button {
+                background-color: rgba(255, 255, 255, 0.5);
+                border-radius: 30px;
+                border-style: solid;
+                border-color: rgb(29, 15, 78);
+                color: rgb(11, 0, 53);
+                font-family: garamond, 'Times New Roman', Times, serif;
+                font-size: 17px;
+            }
+
+            p {
+                color: rgb(10, 0, 53);
+                background-color: rgba(255, 255, 255, 0.541);
+                width: 480px;
+                border-radius: 30px;
+                padding-left: 5px;
+                padding-right: 5px;
+                font-family: garamond, 'Times New Roman', Times, serif;
+                font-size: 17px;
+            }
+        </style>
+        <script>
+            function ConvertToK() {
+                let numb1;
+                numb1 = parseInt(document.getElementById("number-1").value);
+                const numb2 = 273;
+                let plus;
+                plus = numb1 + numb2;
+                document.getElementById("out").value = plus;
+                // alert("Значение градусов в Кельвинах:" + plus);
+            }
+            function ConvertToF() {
+                let numb1 = document.getElementById("number-1").value;
+                const numb2 = 32;
+                let plus = (numb1*9)/5 + numb2;
+                document.getElementById("out").value = plus;
+                // alert("Значение градусов в Фаренгейтах:" + plus);
+            }
+            function TEST() {
+                let x = parseInt(document.getElementById("number-1").value);
+                if(x>0) {
+                    alert("Положительное число");
+                } else{
+                    alert("Отрицательное число");
+
+                }
+            }
+            function plus() {
+                let per1 = parseInt(document.getElementById("num1").value);
+                let per2 = parseInt(document.getElementById("num2").value);
+                let res = per1 + per2;
+                document.getElementById("res").value = res;
+            }
+            function minus() {
+                let per1 = parseInt(document.getElementById("num1").value);
+                let per2 = parseInt(document.getElementById("num2").value);
+                let res = per1 - per2;
+                document.getElementById("res").value = res;
+            }
+            function multiplication() {
+                let per1 = parseInt(document.getElementById("num1").value);
+                let per2 = parseInt(document.getElementById("num2").value);
+                let res = per1 * per2;
+                document.getElementById("res").value = res;
+            }
+            function division() {
+                let per1 = parseInt(document.getElementById("num1").value);
+                let per2 = parseInt(document.getElementById("num2").value);
+                let res = per1 / per2;
+                document.getElementById("res").value = res;
+            }
+            function exponentiation() {
+                let per1 = parseInt(document.getElementById("num1").value);
+                let per2 = parseInt(document.getElementById("num2").value);
+                let res = per1 ** per2;
+                document.getElementById("res").value = res;
+            }
+        </script>
+    </head>
+    <body>
+        <div>
+            <p>Введите число здесь:<input type="text" id="number-1"></p>
+            <button onclick="ConvertToK()">Перевод в Кельвины</button>
+            <button onclick="ConvertToF()">Перевод в Фаренгейты</button>
+            <button onclick="TEST()">Проверь себя!</button>
+            <p>Ответ:<input type="text" id="out"></p>
+        </div>
+        <div>
+            <p>Введите первое число здесь:<input type="text" id="num1"></p>
+            <p>Введите второе число здесь:<input type="text" id="num2"></p>
+            <button onclick="plus()">+</button> <!-- Домашнее задание: сюда добавить минус, умножит и разделить, можно ещё добавить возведение в степень и корень из числа (если смогу :)) -->
+            <button onclick="minus()">-</button>
+            <button onclick="multiplication()">*</button>
+            <button onclick="division()">/</button>
+            <button onclick="exponentiation()">^</button>
+            <p>Результат:<input type="text" id="res"></p>
+        </div>
+        <form action="index_2.html">
+            <button>Обратно на дополнительную страницу</button>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Пятнашки</title>
+        <meta charset="utf-8">
+        <style>
+            body {
+                background-image: url(images/mel-poole-eo5Hrzyb4D0-unsplash.jpg);
+            }
+
+            .button_1 {
+                position: relative;
+                display: inline-block;
+                color: #2b0909;
+                font-weight: bold;
+                font-size: 15px;
+                text-decoration: none;
+                text-shadow: rgba(255,255,255,.5) 1px 1px, rgba(63, 63, 63, 0.3) 3px 7px 3px;
+                font-family: garamond, 'Times New Roman', Times, serif;
+                user-select: none;
+                padding: 1em 2em;
+                outline: none;
+                border-radius: 30px / 100%;
+                background-image:
+                linear-gradient(45deg, rgba(255,255,255,.0) 30%, rgba(255,255,255,.8), rgba(255,255,255,.0) 70%),
+                linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 90%, rgba(255,255,255,.3)),
+                linear-gradient(to right, rgba(125,125,125,1), rgba(255,255,255,.9) 45%, rgba(125,125,125,.5)),
+                linear-gradient(to right, rgba(125,125,125,1), rgba(255,255,255,.9) 45%, rgba(125,125,125,.5)),
+                linear-gradient(to right, rgba(223,190,170,1), rgba(255,255,255,.9) 45%, rgba(223,190,170,.5)),
+                linear-gradient(to right, rgba(223,190,170,1), rgba(255,255,255,.9) 45%, rgba(223,190,170,.5));
+                background-repeat: no-repeat;
+                background-size: 200% 100%, auto, 100% 2px, 100% 2px, 100% 1px, 100% 1px;
+                background-position: 200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
+                box-shadow: rgba(0,0,0,.5) 3px 10px 10px -10px;
+                }
+            input:hover {
+                transition: .5s linear;
+                background-position: -200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
+                }
+            input:active {
+                top: 1px;
+                }
+            
+            p   {
+                font-family: garamond, 'Times New Roman', Times, serif;
+                font-size: 17px;
+                background-color: cornsilk;
+                width: 450px;
+                }
+                
+            h1 {
+                font-family: garamond, 'Times New Roman', Times, serif;
+                }
+
+            form {
+                width: 300px;
+            }
+            
+            
+        </style>
+        <script>
+                function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+    
+        function game() {
+            arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0];
+    
+            this.move = function(x, y) {
+        
+                pos = y * fieldSize + x;
+                if (x > 0) {
+                    posLeft = y * fieldSize + x - 1;
+                    if (arr[posLeft] == 0) {
+                        arr[posLeft] = arr[pos];
+                        arr[pos] = 0;
+                    }
+                }
+                if (x < fieldSize - 1) {
+                    posRight = y * fieldSize + x + 1;
+                    if (arr[posRight] == 0) {
+                        arr[posRight] = arr[pos];
+                        arr[pos] = 0;
+                    }
+                }
+                if (y > 0) {
+                    posTop = (y - 1) * fieldSize + x;
+                    if (arr[posTop] == 0) {
+                        arr[posTop] = arr[pos];
+                        arr[pos] = 0;
+                    }
+                }
+                if (y < fieldSize - 1) {
+                    posBottom = (y + 1) * fieldSize + x;
+                    if (arr[posBottom] == 0) {
+                        arr[posBottom] = arr[pos];
+                        arr[pos] = 0;
+                    }
+                }
+        }
+    
+        this.draw = function() {
+            for (let fy = 0; fy < fieldSize; fy++) {
+                for (let fx = 0; fx < fieldSize; fx++) {
+                    pos = fy * fieldSize + fx;
+                    num = arr[pos];
+                    absX = fx * cellSize + fx + 2;
+                    absY = fy * cellSize + fy + 2;
+                    if (num != 0) {
+                        context.fillStyle = '#000';
+                        context.fillRect(absX, absY, cellSize - 2, cellSize - 2);
+                        context.font = '40px courier';
+                        context.textAlign = 'center';
+                        context.textBaseline = 'middle';
+                        context.fillStyle = '#fff';
+                        context.fillText(num.toString(), absX + ((cellSize - 2) / 2), absY + ((cellSize - 2) / 2));
+                    } else {
+                        context.clearRect(absX, absY, cellSize - 2, cellSize - 2);
+                    }
+                }
+            }
+        }
+        
+        this.mix = function() {
+            for (let c = 1; c < 300; c++) {
+                for (let i = 0; i <=15; i++) {
+                    if (arr[i] == 0) {
+                        x = i % fieldSize;
+                        y = Math.floor(i / fieldSize);
+                        to = getRandomInt(1, 4);
+                        if (to == 1) {
+                            y = y - 1;
+                        }
+                        if (to == 2) {
+                            y = y + 1;
+                        }
+                        if (to == 3) {
+                            x = x - 1;
+                        }
+                        if (to == 4) {
+                            x = x + 1;
+                        }
+                        if ((x >= 0) && (x < fieldSize) && (y >= 0) && (y < fieldSize)) {
+                            this.move(x, y);
+                        }
+                    }
+                }
+            }
+        }
+            this.victory = function() {
+                if (arr.toString() === '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0') {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+    
+        function init() {
+            canvas = document.getElementById('canvas');
+            fieldSize = 4;
+            cellSize = 100;
+            countLines = fieldSize+1;
+            gameSize = fieldSize * cellSize + countLines;
+            canvas.height = gameSize;
+            canvas.width = gameSize;
+            context = canvas.getContext('2d');
+            context.fillStyle = "#ffffff";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = "#000000";
+            for (i = 0; i < countLines; i++) {
+                context.fillRect(i * cellSize + i, 0, 1, canvas.height);
+                context.fillRect(0, i * cellSize + i, canvas.width, 1);
+            }
+       
+            field = new game();
+            field.mix();
+            field.draw();
+            canvas.onclick = function(e) {
+                var x = (e.pageX - canvas.offsetLeft);
+                var y = (e.pageY - canvas.offsetTop);
+                posX = Math.floor(x / (cellSize + 1));
+                posY = Math.floor(y / (cellSize + 1));
+                field.move(posX, posY);
+                field.draw();
+                if (field.victory()) {
+                    context.font = '60px courier';
+                    context.textAlign = 'center';
+                    context.textBaseline = 'middle';
+                    context.fillStyle = '#0f0';
+                    context.fillText('You Win!', (gameSize / 2), (gameSize / 2));
+                }
+            };
+        }
+        
+        </script>
+        
+    </head>
+    <body>
+        <div>
+            <h1>Игра Пятнашки</h1>
+        </div>
+        <form action="Kanada.html" target="_blank">
+            <button class="button_1">Обратно на страницу о Канаде</button>
+         </form> 
+        <form action="calculator1.html" target="_blank">
+            <button class="button_1">Простой калькулятор</button>
+        </form> 
+        <form action="calculator2.html" target="_blank">
+            <button class="button_1">Калькулятор V 2.0</button>
+        </form>
+        <div>
+            <p>Как и в настоящих пятнашках, в этих пятнашках можно переставлять любой элемент на свободное место</p>
+            <p>Чтобы начать играть, нажмите на кнопку "Новая игра". После этого появится поле, на котором фишки можно перетаскивать по нажатию на кнопку мыши.</p>
+        </div>
+        <div>
+            <input class="button_1" type="button" value="Новая игра" onclick="init();">
+        </div>
+        <div>
+            <canvas id="canvas"></canvas>
+        </div>
+    </body>
+</html>

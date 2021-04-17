@@ -1,0 +1,179 @@
+<script>
+            
+            function init()
+            {
+                // получаем доступ к элементу по ID
+                canvas = document.getElementById('canvas');
+                // количество по 1 стороне, всего полей: fieldSize*2
+                fieldSize = 4;
+                // размер поля в пикселях
+                cellSize = 100;
+                // количество линий между элементами
+                countLines = fieldSize + 1;
+                // общий размер игрового поля
+                gameSize = fieldSize * cellSize + countLines;
+                // устанавливаем размер поля по высоте
+                canvas.height = gameSize;
+                // устанавливаем размер поля по ширине
+                canvas.width = gameSize;
+                context = canvas.getContext('2d');
+                // выбираем цвет для отрисовки поля
+                context.fillStyle="#000000";
+                // рисуем поле выьранным цветом
+                context.fillRect(0,0,canvas.width,canvas.height);
+                // выбираем цвет для отрисовки линий
+                context.fillStyle="#ffffff";
+                // рисуем линии
+                for(let i = 0; i < countLines; i++) {
+                    context.fillRect(i*cellSize+i,0,1,canvas.height);
+                    context.fillRect(0,i*cellSize+i,canvas.width,1);
+                }
+                
+                // создаём объект game()
+                field = new game();
+                // вызываем функцию mix для случайной последовательности полей
+                field.mix();
+                // вызывам метод для отрисовки полей
+                field.draw();
+                
+                // при нажатии на поле срабатывает функции
+                canvas.onclick = function(e) {
+                    let x = (e.pageX - canvas.offsetLeft);
+                    let y = (e.pageY - canvas.offsetTop);
+                    
+                    posX = Math.floor(x/(cellSize+1));
+                    posY = Math.floor(y/(cellSize+1));
+                    
+                    field.move(posX,posY);
+                    
+                    field.draw();
+                    
+                    // проверка на победу в игре
+                    if(field.victory())
+                    {
+                        context.font = '60px courier';
+                        context.textAlign = 'center';
+                        context.textBaseLine = 'middle';
+                        context.fillstyle = "#0f0";
+                        context.fillText('You win!',(gameSize/2),(gameSize/2)); 
+                    }
+                }
+            }
+                       
+            function game()
+            {
+                // массив с начальными элементами 
+                arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0];
+                
+                this.move = function(x,y)
+                {
+                    pos = y * fieldSize + x;
+                    
+                    if (x > 0)
+                    {
+                        posleft = y * fieldSize + x - 1; 
+                        if (arr[posleft] == 0) {
+                            arr[posleft] = arr[pos];
+                            arr[pos] = 0;
+                        }  
+                    }
+                    
+                    if (x < fieldSize - 1)
+                    {
+                        posRight = y * fieldSize + x + 1; 
+                        if (arr[posRight] == 0) {
+                            arr[posRight] = arr[pos];
+                            arr[pos] = 0;
+                        }  
+                    }
+                
+                    if (y > 0)
+                    {
+                        posUp = (y - 1)  * fieldSize + x; 
+                        if (arr[posUp] == 0) {
+                            arr[posUp] = arr[pos];
+                            arr[pos] = 0;
+                        }  
+                    }
+                            
+                    if (y < fieldSize -1)
+                    {
+                        posDown = (y + 1)  * fieldSize + x; 
+                        if (arr[posDown] == 0) {
+                            arr[posDown] = arr[pos];
+                            arr[pos] = 0;
+                        }          
+                    }    
+                }
+                
+                this.draw = function()
+                {
+                    for(let fy = 0; fy <  fieldSize; fy++) {
+                        for(let fx = 0; fx <  fieldSize; fx++) {
+                            pos = fy * fieldSize + fx;
+                            num = arr[pos];
+                            absX = fx * cellSize + fx + 2;
+                            absY = fy * cellSize + fy + 2;
+                            if(num != 0)
+                            {
+                                context.fillstyle = "#000000";
+                                context.fillRect(absX,absY,cellSize-2,cellSize-2);
+                                context.font = '40px courier';
+                                context.textAlign = 'center';
+                                context.textBaseLine = 'middle';
+                                context.fillstyle = "#ffffff";
+                                context.fillText(num.toString(),absX + ((cellSize - 2)/2),absY + ((cellSize - 2)/2));
+                            }
+                            else {
+                                context.clearRect(absX,absY,cellSize-2,cellSize-2);
+                            }
+                        }
+                    }
+                }
+                
+                this.mix = function()
+                {
+                    for(let c = 1; c <  300; c++) {
+                        for(let i = 0; i <=  15; i++) {
+                            if (arr[i] == 0) {
+                                x = Math.floor(i/fieldSize)
+                                y = Math.floor(i/fieldSize);
+                                to = getRandomInt(1,4);
+                                if (to == 1) {
+                                    y = y - 1;
+                                }
+                                if (to == 2) {
+                                    y = y + 1;
+                                }
+                                if (to == 3) {
+                                   x = x - 1;
+                                }
+                                if (to == 3) {
+                                   x = x + 1;
+                                }
+                                if ((x >= 0) && (x < fieldSize) && (y >= 0) && (y < fieldSize)) {
+                                    this.move(x,y);
+                                }
+                            }  
+                        }
+                    }
+                }
+                
+                // функция проверки на окончание игры (на победу)
+                this.victory = function()
+                {
+                    //'1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0'
+                    if (arr.toString() === '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0')
+                    {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+            
+            function getRandomInt(min,max) {
+                return Math.floor(Math.random()*(max-min+1)) + min;
+            }
+    
+        </script>
